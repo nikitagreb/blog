@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->get('/', 'HomeController@index')->name('home');
+
+Route::middleware('auth')->namespace('Admin')->as('admin.')->group(function () {
+    Route::resource('tags', 'TagController');
+    Route::resource('posts', 'PostController');
+});

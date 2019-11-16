@@ -23,6 +23,10 @@ class CreateTagsTable extends Migration
 
             $table->increments('id');
             $table->string('name', 100)->comment('Название');
+            $table->string('slug', 120)->comment('Псевдоним для ссылки');
+            $table->enum('status', ['active', 'not_active'])
+                ->default('active')
+                ->comment('Статус');
             $table->timestamps();
         });
     }
