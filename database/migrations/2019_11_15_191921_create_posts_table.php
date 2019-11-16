@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
 
             $table->string('h1', 100)->comment('Заголовок');
+            $table->string('slug', 120)->comment('Псевдоним для ссылки');
             $table->string('title', 100)->comment('Заголовок страницы');
             $table->string('description', 200)->comment('Описание');
             $table->string('keywords', 200)->comment('Ключевые слова');

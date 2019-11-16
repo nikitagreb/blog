@@ -19,8 +19,45 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Tag whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Tag whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $status Статус
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
+ * @property-read int|null $posts_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Tag whereStatus($value)
+ * @property string $slug Псевдоним для ссылки
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Tag whereSlug($value)
  */
 class Tag extends Model
 {
-    //
+    /** @var string */
+    public const STATUS_ACTIVE = 'active';
+    /** @var string */
+    public const STATUS_NOT_ACTIVE = 'not_active';
+
+    protected $fillable = [
+        'name', 'status', 'slug',
+    ];
+
+    public function posts()
+    {
+        return $this->morphedByMany(Post::class, 'taggable');
+    }
+
+    public function getStatusName(): string
+    {
+        return self::statusList()[$this->status];
+
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === self::STATUS_ACTIVE;
+    }
+
+    public static function statusList(): array
+    {
+        return [
+            static::STATUS_ACTIVE => 'Активный',
+            static::STATUS_NOT_ACTIVE => 'Не активный',
+        ];
+    }
 }
