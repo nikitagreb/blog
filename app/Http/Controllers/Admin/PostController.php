@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Tag;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Arr;
 use Illuminate\Http\{RedirectResponse, Request};
@@ -10,7 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Posts\{StoreRequest, UpdateRequest};
-use App\Models\Post;
+use App\Models\{Post, Tag};
 
 /**
  * Class PostController

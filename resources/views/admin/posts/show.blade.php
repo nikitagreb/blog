@@ -5,7 +5,6 @@
         /** @var \App\Models\Post $post */
     @endphp
     <div class="row">
-
         <div class="col card">
             <div class="card-body">
                 <h1>Просмотр поста</h1>
