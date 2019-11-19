@@ -50,6 +50,11 @@ class Post extends Model
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
+    public function avatar()
+    {
+        return $this->morphOne(ImageAvatar::class, 'avatar_table');
+    }
+
     public function getStatusName(): string
     {
         return self::statusList()[$this->status];

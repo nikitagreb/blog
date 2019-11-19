@@ -32,6 +32,7 @@ class StoreRequest extends FormRequest
             'keywords' => 'required|max:200',
             'text' => 'required',
             'tags' => 'required|array',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'status' => [
                 'required',
                 Rule::in(array_keys(Post::statusList()))
