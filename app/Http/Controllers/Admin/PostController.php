@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use File;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Arr;
-use Image;
 use Illuminate\Http\{RedirectResponse, Request};
 use Illuminate\Support\Str;
 use Illuminate\View\View;
