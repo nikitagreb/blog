@@ -19,6 +19,12 @@
                             <td>{{ $post->h1 }}</td>
                         </tr>
                         <tr>
+                            <th>Фото</th>
+                            <td>
+                                <img src="{{ $post->avatar->getImage() }}" alt="{{ $post->avatar->alt }}">
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Псевдоним</th>
                             <td>{{ $post->slug }}</td>
                         </tr>

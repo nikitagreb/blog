@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Posts\{StoreRequest, UpdateRequest};
-use App\Models\{Post, Tag};
+use App\Models\{ImageAvatar, Post, Tag};
 
 /**
  * Class PostController
@@ -67,6 +67,7 @@ class PostController extends Controller
             'slug' => Str::slug($request['h1'], '-'),
         ]);
         $post->tags()->sync($request['tags']);
+        ImageAvatar::createModel($post, $request->file('avatar'));
 
         return redirect()->route('admin.posts.show', compact('post'));
     }

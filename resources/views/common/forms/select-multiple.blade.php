@@ -12,13 +12,15 @@ if ($value) {
     }
 }
 
+$ids = old($attribute, $ids);
+
 @endphp
 
 <div class="form-group">
     <label for="{{ $attribute }}" class="col-form-label">{{ $label }}</label>
     <select id="{{ $attribute }}" class="form-control{{ $errors->has($attribute) ? ' is-invalid' : '' }}" name="{{ $attribute }}[]" multiple>
         @foreach ($data as $key => $valueName)
-            <option value="{{ $key }}"{{ in_array($key, $ids, true) ? ' selected' : '' }}>{{ $valueName }}</option>
+            <option value="{{ $key }}"{{ in_array($key, $ids, false) ? ' selected' : '' }}>{{ $valueName }}</option>
         @endforeach;
     </select>
     @if ($errors->has($attribute))
