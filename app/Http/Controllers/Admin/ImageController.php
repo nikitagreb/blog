@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Image\DeleteRequest;
-use App\Http\Requests\Image\UpdateAltRequest;
-use App\Http\Requests\Image\UploadRequest;
+use App\Http\Requests\Image\{DeleteRequest, UpdateAltRequest, UploadRequest};
 use App\Models\ImageAvatar;
-use App\Models\Post;
 
 class ImageController extends Controller
 {
