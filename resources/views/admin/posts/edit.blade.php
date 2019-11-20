@@ -33,6 +33,17 @@
                             'label' => 'Мета ключевые слова',
                             'value' => $post->keywords,
                         ])
+
+                        <main-photo model-id="{{ $post->id }}"
+                                    model-type="{{ get_class($post) }}"
+                                    current-image-id="{{ !$post->avatar ? 'null' : $post->avatar->id }}"
+                                    current-image-alt="{{ !$post->avatar ? 'null' : $post->avatar->alt }}"
+                                    current-image-url="{{ !$post->avatar ? 'null' : $post->avatar->getImage() }}"
+                                    delete-url="{{ route('admin.image.delete') }}"
+                                    update-alt-url="{{ route('admin.image.update-alt') }}"
+                                    upload-url="{{ route('admin.image.upload-main') }}">
+                        </main-photo>
+
                         @include('common.forms.textarea', [
                             'attribute' => 'text',
                             'label' => 'Текст',

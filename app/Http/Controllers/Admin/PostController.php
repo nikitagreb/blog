@@ -62,14 +62,11 @@ class PostController extends Controller
             'title' => $request['title'],
             'description' => $request['description'],
             'keywords' => $request['keywords'],
-            'text' => $request['text'],
-            'status' => $request['status'],
+            'text' => '',
             'slug' => Str::slug($request['h1'], '-'),
         ]);
-        $post->tags()->sync($request['tags']);
-        ImageAvatar::createModel($post, $request->file('avatar'));
 
-        return redirect()->route('admin.posts.show', compact('post'));
+        return redirect()->route('admin.posts.edit', compact('post'));
     }
 
     /**
