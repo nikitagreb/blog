@@ -32,6 +32,8 @@ class CreatePostsTable extends Migration
             $table->text('text')
                 ->charset('utf8mb4')
                 ->collation('utf8mb4_unicode_ci')
+//                ->default('')
+                ->nullable(false)
                 ->comment('Текст новости');
             $table->enum('status', ['published', 'unpublished'])
                 ->default('unpublished')

@@ -47,12 +47,12 @@ class ImageAvatar extends Model
     ];
 
     /**
-     * @param array $model
+     * @param $model
      * @param UploadedFile $file
      * @param string $altAttribute
-     * @return Model|mixed
+     * @return static
      */
-    public static function createModel($model, UploadedFile $file, $altAttribute = 'h1')
+    public static function createModel($model, UploadedFile $file, $altAttribute = 'h1'): self
     {
         $name = self::imageUpload($model, $file);
 
@@ -63,7 +63,6 @@ class ImageAvatar extends Model
             'avatar_table_id' => $model->id,
             'avatar_table_type' => get_class($model),
         ]);
-
     }
 
     public static function imageUpload($model, UploadedFile $file): string
@@ -101,6 +100,14 @@ class ImageAvatar extends Model
     public function getImage(): string
     {
         return self::getOriginPath($this->avatar_table_type, $this->avatar_table_id, true) . '/' . $this->name;
+    }
+
+    public function delete(): ?bool
+    {
+        $path = self::getOriginPath($this->avatar_table_type, $this->avatar_table_id, false);
+        @unlink($path. '/' . $this->name);
+
+        return parent::delete();
     }
 
     /**
