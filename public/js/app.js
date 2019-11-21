@@ -1916,7 +1916,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['modelId', 'modelType', 'uploadUrl', 'deleteUrl', 'updateAltUrl', 'currentImageUrl', 'currentImageId', 'currentImageAlt'],
   mounted: function mounted() {
@@ -1947,45 +1946,41 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     saveAlt: function saveAlt() {
-      var app = this;
+      var _this = this;
+
       var form = new FormData();
       form.append('imageId', this.imageId);
       form.append('imageAlt', this.imageAlt);
       axios.post(this.updateAltUrl, form).then(function (response) {
-        app.altHasError = false;
-        app.altErrorMessage = null;
+        _this.altHasError = false;
+        _this.altErrorMessage = null;
       })["catch"](function (error) {
-        app.altHasError = true;
-        app.altErrorMessage = error.response.statusText;
+        _this.altHasError = true;
+        _this.altErrorMessage = error.response.statusText;
 
-        if (error.response.status === 422) {
-          var dataResponse = JSON.parse(error.response.request.response);
-
-          if (dataResponse.errors.image) {
-            app.altErrorMessage = dataResponse.errors.image[0];
-          }
-        }
+        _this.setServerValidateError(error);
       });
     },
     deleteImage: function deleteImage() {
-      var app = this;
+      var _this2 = this;
+
       var form = new FormData();
       form.append('imageId', this.imageId);
       axios.post(this.deleteUrl, form).then(function (response) {
-        app.mainImage = null;
-        app.imageId = null;
-        app.imageUrl = null;
-        app.imageDeleteMessage = null;
+        _this2.mainImage = null;
+        _this2.imageId = null;
+        _this2.imageUrl = null;
+        _this2.imageDeleteMessage = null;
       })["catch"](function (error) {
-        app.imageDeleteMessage = error.response.statusText;
+        _this2.imageDeleteMessage = error.response.statusText;
       });
     },
-    altInputChange: function altInputChange() {
+    altInputChange: function altInputChange($event) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function altInputChange$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              this.imageAlt = event.target.value;
+              this.imageAlt = $event.target.value;
 
             case 1:
             case "end":
@@ -1994,12 +1989,12 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, null, this);
     },
-    fileInputChange: function fileInputChange() {
+    fileInputChange: function fileInputChange($event) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function fileInputChange$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              this.mainImage = event.target.files[0];
+              this.mainImage = $event.target.files[0];
               _context2.next = 3;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this.uploadImage());
 
@@ -2011,42 +2006,316 @@ __webpack_require__.r(__webpack_exports__);
       }, null, this);
     },
     uploadImage: function uploadImage() {
-      var app, form;
+      var _this3 = this;
+
+      var form;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function uploadImage$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              app = this;
               form = new FormData();
               form.append('modelId', this.modelId);
               form.append('modelType', this.modelType);
               form.append('image', this.mainImage);
-              _context3.next = 7;
+              _context3.next = 6;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post(this.uploadUrl, form).then(function (response) {
-                app.imageHasError = false;
-                app.imageErrorMessage = null;
-                app.imageId = response.data.imageId;
-                app.imageUrl = response.data.imageUrl;
+                _this3.imageHasError = false;
+                _this3.imageErrorMessage = null;
+                _this3.imageAlt = null;
+                _this3.imageId = response.data.imageId;
+                _this3.imageUrl = response.data.imageUrl;
               })["catch"](function (error) {
-                app.mainImage = null;
-                app.imageHasError = true;
-                app.imageErrorMessage = error.response.statusText;
+                _this3.mainImage = null;
+                _this3.imageAlt = null;
+                _this3.imageHasError = true;
+                _this3.imageErrorMessage = error.response.statusText;
 
-                if (error.response.status === 422) {
-                  var dataResponse = JSON.parse(error.response.request.response);
-
-                  if (dataResponse.errors.image) {
-                    app.imageErrorMessage = dataResponse.errors.image[0];
-                  }
-                }
+                _this3.setServerValidateError(error);
               }));
 
-            case 7:
+            case 6:
             case "end":
               return _context3.stop();
           }
         }
       }, null, this);
+    },
+    setServerValidateError: function setServerValidateError(error) {
+      if (error.response.status === 422) {
+        var dataResponse = JSON.parse(error.response.request.response);
+
+        if (dataResponse.errors.image) {
+          this.imageErrorMessage = dataResponse.errors.image[0];
+        }
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/posts/TextPhotos.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/posts/TextPhotos.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['modelId', 'modelType', 'uploadUrl', 'deleteUrl', 'updateAltUrl', 'getImagesUrl'],
+  mounted: function mounted() {
+    this.initFilesUploaded();
+  },
+  data: function data() {
+    return {
+      filesOrder: [],
+      filesFinish: [],
+      filesError: [],
+      fileProgress: 0,
+      fileCurrent: ''
+    };
+  },
+  methods: {
+    copyCode: function copyCode($event) {
+      var image = this.filesFinish[$event.target.dataset.imageIndex];
+      var text = document.createElement('input');
+      text.value = "<img src=\"".concat(image.imageUrl, "\" alt=\"").concat(image.imageAlt, "\">");
+      document.body.appendChild(text);
+      text.select();
+      document.execCommand('copy');
+      document.body.removeChild(text);
+    },
+    deleteImage: function deleteImage($event) {
+      var _this = this;
+
+      var index = $event.target.dataset.imageIndex;
+      var form = new FormData();
+      form.append('imageId', this.filesFinish[index].imageId);
+      axios.post(this.deleteUrl, form).then(function (response) {
+        _this.filesFinish.splice(index, 1);
+      })["catch"](function (error) {
+        console.log(error.response.statusText);
+      });
+    },
+    altInputChange: function altInputChange($event) {
+      var image = this.filesFinish[$event.target.dataset.imageIndex];
+      var form = new FormData();
+      form.append('imageId', image.imageId);
+      form.append('imageAlt', $event.target.value);
+      axios.post(this.updateAltUrl, form).then(function (response) {
+        image.imageHasError = false;
+        image.altErrorMessage = null;
+        image.imageAlt = $event.target.value;
+      })["catch"](function (error) {
+        image.imageHasError = true;
+        image.imageErrorMessage = error.response.statusText;
+
+        if (error.response.status === 422) {
+          var dataResponse = JSON.parse(error.response.request.response);
+
+          if (dataResponse.errors.imageAlt) {
+            image.imageErrorMessage = dataResponse.errors.imageAlt[0];
+          }
+        }
+      });
+    },
+    initFilesUploaded: function initFilesUploaded() {
+      var _this2 = this;
+
+      var form = new FormData();
+      form.append('modelId', this.modelId);
+      form.append('modelType', this.modelType);
+      axios.post(this.getImagesUrl, form).then(function (response) {
+        if (response.data.length > 0) {
+          var _iteratorNormalCompletion = true;
+          var _didIteratorError = false;
+          var _iteratorError = undefined;
+
+          try {
+            for (var _iterator = response.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+              var image = _step.value;
+              image.imageAlt = '';
+              image.imageErrorMessage = '';
+              image.imageHasError = false;
+
+              _this2.filesFinish.push(image);
+            }
+          } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+                _iterator["return"]();
+              }
+            } finally {
+              if (_didIteratorError) {
+                throw _iteratorError;
+              }
+            }
+          }
+        }
+      })["catch"](function (error) {
+        console.log(error.response.statusText);
+      });
+    },
+    fileInputChange: function fileInputChange($event) {
+      var images, _i, _images, image;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function fileInputChange$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              images = Array.from($event.target.files);
+              this.filesOrder = images.slice();
+              _i = 0, _images = images;
+
+            case 3:
+              if (!(_i < _images.length)) {
+                _context.next = 10;
+                break;
+              }
+
+              image = _images[_i];
+              _context.next = 7;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this.uploadImage(image));
+
+            case 7:
+              _i++;
+              _context.next = 3;
+              break;
+
+            case 10:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, this);
+    },
+    uploadImage: function uploadImage(image) {
+      var _this3 = this;
+
+      var form;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function uploadImage$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              form = new FormData();
+              form.append('modelId', this.modelId);
+              form.append('modelType', this.modelType);
+              form.append('image', image);
+              _context2.next = 6;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post(this.uploadUrl, form, {
+                onUploadProgress: function onUploadProgress(itemUpload) {
+                  _this3.fileProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
+                  _this3.fileCurrent = image.name + ' ' + _this3.fileProgress;
+                }
+              }).then(function (response) {
+                _this3.fileProgress = 0;
+                _this3.fileCurrent = '';
+                response.data.imageAlt = '';
+                response.data.imageErrorMessage = '';
+                response.data.imageHasError = false;
+
+                _this3.filesFinish.push(response.data);
+
+                _this3.filesOrder.splice(image, 1);
+              })["catch"](function (error) {
+                var errorText = error.response.statusText;
+
+                if (error.response.status === 422) {
+                  var dataResponse = JSON.parse(error.response.request.response);
+
+                  if (dataResponse.errors.image) {
+                    errorText = dataResponse.errors.image[0];
+                  }
+                }
+
+                _this3.fileProgress = 0;
+                _this3.fileCurrent = '';
+
+                _this3.filesError.push({
+                  'name': image.name,
+                  'error': errorText
+                });
+
+                _this3.filesOrder.splice(image, 1);
+              }));
+
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, null, this);
+    },
+    clearErrors: function clearErrors() {
+      this.filesError = [];
     }
   }
 });
@@ -38154,7 +38423,11 @@ var render = function() {
             name: "mainImage",
             disabled: _vm.imageId !== null
           },
-          on: { change: _vm.fileInputChange }
+          on: {
+            change: function($event) {
+              return _vm.fileInputChange($event)
+            }
+          }
         }),
         _vm._v(" "),
         _vm.mainImage === null
@@ -38163,7 +38436,7 @@ var render = function() {
               { staticClass: "custom-file-label", attrs: { for: "mainImage" } },
               [
                 _vm._v(
-                  "\n                Загрузитие изображение...\n            "
+                  "\n                Загрузите главное изображение...\n            "
                 )
               ]
             )
@@ -38192,7 +38465,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _vm.imageUrl !== null
-      ? _c("div", { staticClass: "card" }, [
+      ? _c("div", { staticClass: "card form-group" }, [
           _c("img", {
             staticClass: "card-img-top",
             attrs: { src: _vm.imageUrl }
@@ -38207,7 +38480,12 @@ var render = function() {
               _c("input", {
                 class: { "form-control": true, "is-invalid": _vm.altHasError },
                 attrs: { type: "text", id: "mainAlt", name: "mainAlt" },
-                on: { change: _vm.altInputChange }
+                domProps: { value: _vm.imageAlt },
+                on: {
+                  change: function($event) {
+                    return _vm.altInputChange($event)
+                  }
+                }
               }),
               _vm._v(" "),
               _c(
@@ -38229,13 +38507,19 @@ var render = function() {
             _vm._v(" "),
             _c(
               "span",
-              { staticClass: "btn btn-primary", on: { click: _vm.saveAlt } },
+              {
+                staticClass: "btn btn-primary btn-sm",
+                on: { click: _vm.saveAlt }
+              },
               [_vm._v("Сохранить")]
             ),
             _vm._v(" "),
             _c(
               "span",
-              { staticClass: "btn btn-danger", on: { click: _vm.deleteImage } },
+              {
+                staticClass: "btn btn-danger btn-sm",
+                on: { click: _vm.deleteImage }
+              },
               [_vm._v("Удалить фото")]
             ),
             _vm._v(" "),
@@ -38247,6 +38531,252 @@ var render = function() {
           ])
         ])
       : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/posts/TextPhotos.vue?vue&type=template&id=779b11b5&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/posts/TextPhotos.vue?vue&type=template&id=779b11b5& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "custom-file" }, [
+        _c("input", {
+          staticClass: "custom-file-input",
+          attrs: {
+            type: "file",
+            id: "textPhotos",
+            name: "textPhotos",
+            multiple: ""
+          },
+          on: {
+            change: function($event) {
+              return _vm.fileInputChange($event)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          { staticClass: "custom-file-label", attrs: { for: "textPhotos" } },
+          [
+            _vm._v(
+              "\n                Загрузите изображения для текста...\n            "
+            )
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.filesOrder.length > 0,
+            expression: "filesOrder.length > 0"
+          }
+        ],
+        staticClass: "form-group"
+      },
+      [
+        _c("div", { staticClass: "progress" }, [
+          _c(
+            "div",
+            {
+              staticClass: "progress-bar",
+              style: { width: _vm.fileProgress + "%" }
+            },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.fileCurrent) +
+                  "%\n            "
+              )
+            ]
+          )
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.filesError.length > 0,
+            expression: "filesError.length > 0"
+          }
+        ],
+        staticClass: "form-group"
+      },
+      [
+        _c("h4", [_vm._v("Ошибки загрузки")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "ul",
+            { staticClass: "list-group" },
+            _vm._l(_vm.filesError, function(image) {
+              return _c("li", { staticClass: "list-group-item" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(image.name) +
+                    ": " +
+                    _vm._s(image.error) +
+                    "\n                "
+                )
+              ])
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            staticClass: "btn btn-sm btn-success",
+            on: { click: _vm.clearErrors }
+          },
+          [_vm._v("Очистить ошибки")]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.filesFinish.length > 0,
+            expression: "filesFinish.length > 0"
+          }
+        ],
+        staticClass: "form-group"
+      },
+      [
+        _c("h4", [_vm._v("Загруженные изображения")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(_vm.filesFinish, function(image, index) {
+            return _c("div", { staticClass: "col-3" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  staticStyle: { "max-height": "150px" },
+                  attrs: { src: image.imageUrl }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "imageAlt" + index } }, [
+                      _vm._v("Атрибут alt")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      class: {
+                        "form-control": true,
+                        "is-invalid": image.imageHasError
+                      },
+                      attrs: {
+                        type: "text",
+                        id: "imageAlt" + index,
+                        name: "imageAlt" + index,
+                        "data-image-index": index
+                      },
+                      domProps: { value: image.imageAlt },
+                      on: {
+                        change: function($event) {
+                          return _vm.altInputChange($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: image.imageHasError,
+                            expression: "image.imageHasError"
+                          }
+                        ],
+                        staticClass: "invalid-feedback"
+                      },
+                      [_vm._v(_vm._s(image.imageErrorMessage))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "btn btn-sm btn-danger",
+                      attrs: { "data-image-index": index },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteImage($event)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Удалить\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "btn btn-sm btn-success",
+                      attrs: { "data-image-index": index },
+                      on: {
+                        click: function($event) {
+                          return _vm.copyCode($event)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Скопировать код\n                        "
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ])
+          }),
+          0
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = []
@@ -50419,6 +50949,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('main-photo', __webpack_require__(/*! ./components/admin/posts/MainPhoto.vue */ "./resources/js/components/admin/posts/MainPhoto.vue")["default"]);
+Vue.component('text-photos', __webpack_require__(/*! ./components/admin/posts/TextPhotos.vue */ "./resources/js/components/admin/posts/TextPhotos.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -50609,6 +51140,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPhoto_vue_vue_type_template_id_59075bbc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPhoto_vue_vue_type_template_id_59075bbc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/posts/TextPhotos.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/admin/posts/TextPhotos.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TextPhotos_vue_vue_type_template_id_779b11b5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TextPhotos.vue?vue&type=template&id=779b11b5& */ "./resources/js/components/admin/posts/TextPhotos.vue?vue&type=template&id=779b11b5&");
+/* harmony import */ var _TextPhotos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TextPhotos.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/posts/TextPhotos.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TextPhotos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TextPhotos_vue_vue_type_template_id_779b11b5___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TextPhotos_vue_vue_type_template_id_779b11b5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/posts/TextPhotos.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/posts/TextPhotos.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/admin/posts/TextPhotos.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TextPhotos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TextPhotos.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/posts/TextPhotos.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TextPhotos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/posts/TextPhotos.vue?vue&type=template&id=779b11b5&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/admin/posts/TextPhotos.vue?vue&type=template&id=779b11b5& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextPhotos_vue_vue_type_template_id_779b11b5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TextPhotos.vue?vue&type=template&id=779b11b5& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/posts/TextPhotos.vue?vue&type=template&id=779b11b5&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextPhotos_vue_vue_type_template_id_779b11b5___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextPhotos_vue_vue_type_template_id_779b11b5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -39,10 +39,18 @@
                                     current-image-id="{{ !$post->avatar ? 'null' : $post->avatar->id }}"
                                     current-image-alt="{{ !$post->avatar ? 'null' : $post->avatar->alt }}"
                                     current-image-url="{{ !$post->avatar ? 'null' : $post->avatar->getImage() }}"
-                                    delete-url="{{ route('admin.image.delete') }}"
-                                    update-alt-url="{{ route('admin.image.update-alt') }}"
+                                    delete-url="{{ route('admin.image.delete-main') }}"
+                                    update-alt-url="{{ route('admin.image.update-main-alt') }}"
                                     upload-url="{{ route('admin.image.upload-main') }}">
                         </main-photo>
+
+                        <text-photos model-id="{{ $post->id }}"
+                                     model-type="{{ get_class($post) }}"
+                                     upload-url="{{ route('admin.image.upload-image') }}"
+                                     delete-url="{{ route('admin.image.delete-image') }}"
+                                     get-images-url="{{ route('admin.image.get-images') }}"
+                                     update-alt-url="{{ route('admin.image.update-image-alt') }}">
+                        </text-photos>
 
                         @include('common.forms.textarea', [
                             'attribute' => 'text',
