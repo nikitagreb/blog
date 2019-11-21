@@ -33,6 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $tags_count
  * @property string $slug Псевдоним для ссылки
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereSlug($value)
+ * @property-read \App\Models\ImageAvatar $avatar
  */
 class Post extends Model
 {

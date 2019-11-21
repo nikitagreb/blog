@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('main-photo', require('./components/admin/posts/MainPhoto.vue').default);
+Vue.component('text-photos', require('./components/admin/posts/TextPhotos.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
