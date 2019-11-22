@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('main-photo', require('./components/admin/posts/MainPhoto.vue').default);
 Vue.component('text-photos', require('./components/admin/posts/TextPhotos.vue').default);
+Vue.component('markdown-editor', require('./components/admin/posts/MarkdownEditor').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
