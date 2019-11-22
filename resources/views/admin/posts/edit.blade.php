@@ -52,17 +52,21 @@
                                      update-alt-url="{{ route('admin.image.update-image-alt') }}">
                         </text-photos>
 
-                        @include('common.forms.textarea', [
-                            'attribute' => 'text',
-                            'label' => 'Текст',
-                            'value' => $post->text,
-                        ])
+                        <markdown-editor
+                            attribute="text"
+                            label="Текст"
+                            value="{{ old('text', $post->text) }}"
+                            has-error="{{ $errors->has('text') }}"
+                            text-error="{{ $errors->has('text') ? $errors->first('text') : null }}"
+                        ></markdown-editor>
+
                         @include('common.forms.select', [
                             'attribute' => 'status',
                             'label' => 'Статус',
                             'data' => $statusList,
                             'value' => $post->status,
                         ])
+
                         @include('common.forms.select-multiple', [
                             'attribute' => 'tags',
                             'label' => 'Теги',
