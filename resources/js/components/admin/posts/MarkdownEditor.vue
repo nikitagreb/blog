@@ -20,7 +20,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -35,7 +34,6 @@
             'textError'
         ],
         mounted() {
-            console.log('markdown mounted');
             this.input = this.value;
         },
         data() {
@@ -51,7 +49,6 @@
             compiledMarkdown: function () {
                 return marked(this.input, {
                     sanitize: false
-                    // xhtml: true
                 })
             }
         },
@@ -78,7 +75,6 @@
         resize: none;
         outline: none;
     }
-
     code {
         color: #f66;
     }
