@@ -16,10 +16,10 @@ Auth::routes(['register' => false]);
 Route::middleware('auth')->get('/', 'HomeController@index')->name('home');
 
 Route::namespace('Api')->group(function () {
-    Route::get('posts', 'PostController@getList')
+    Route::get('posts/{cnt}', 'PostController@getList')
         ->name('posts')
         ->where(['cnt' => '\d+']);
-    Route::get('posts/{id}', 'PostController@view')
+    Route::get('post/{id}', 'PostController@view')
         ->name('posts.view')
         ->where(['id' => '\d+']);
 });
