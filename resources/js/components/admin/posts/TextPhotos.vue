@@ -41,8 +41,10 @@
                                 <label :for="'imageAlt' + index">Атрибут alt</label>
                                 <input type="text" :class="{ 'form-control': true, 'is-invalid': image.imageHasError }"
                                        :id="'imageAlt' + index" :name="'imageAlt' + index" :value="image.imageAlt"
-                                       @change="altInputChange($event)" :data-image-index="index">
-                                <div class="invalid-feedback" v-show="image.imageHasError">{{ image.imageErrorMessage }}</div>
+                                       @input="altInputChange($event)" :data-image-index="index">
+                                <div class="invalid-feedback" v-show="image.imageHasError">
+                                    {{ image.imageErrorMessage }}
+                                </div>
                             </div>
                             <span class="btn btn-sm btn-danger" :data-image-index="index" @click="deleteImage($event)">
                                 Удалить

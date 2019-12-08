@@ -42,30 +42,61 @@ class Post extends Model
     /** @var string */
     public const STATUS_PUBLISHED = 'published';
 
+    /** @var array */
     protected $fillable = [
         'h1', 'title', 'description', 'keywords', 'text', 'status', 'slug',
     ];
 
+    /** @var array */
+    protected $hidden = ['status', 'updated_at', 'avatar', 'text'];
+
+    /** @var array */
+    protected $appends = ['avatar_url'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function getAvatarUrlAttribute()
+    {
+        return $this->attributes['avatarUrl'] = $this->avatar->getImage();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
     public function avatar()
     {
         return $this->morphOne(ImageAvatar::class, 'avatar_table');
     }
 
+    /**
+     * @return string
+     */
     public function getStatusName(): string
     {
         return self::statusList()[$this->status];
     }
 
+    /**
+     * @return bool
+     */
     public function isPublished(): bool
     {
         return $this->status === self::STATUS_PUBLISHED;
     }
 
+    /**
+     * @return array
+     */
     public static function statusList(): array
     {
         return [

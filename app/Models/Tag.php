@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Tag extends Model
 {
+    protected $hidden = ['status', 'created_at', 'updated_at', 'pivot'];
+
     /** @var string */
     public const STATUS_ACTIVE = 'active';
     /** @var string */

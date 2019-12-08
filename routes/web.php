@@ -15,7 +15,16 @@ Auth::routes(['register' => false]);
 
 Route::middleware('auth')->get('/', 'HomeController@index')->name('home');
 
-Route::middleware('auth')->namespace('Admin')->as('admin.')->group(function () {
+Route::namespace('Api')->group(function () {
+    Route::get('posts/{cnt}', 'PostController@getList')
+        ->name('posts')
+        ->where(['cnt' => '\d+']);
+    Route::get('post/{id}', 'PostController@view')
+        ->name('posts.view')
+        ->where(['id' => '\d+']);
+});
+
+Route::middleware('auth')->namespace('Admin')->prefix('admin')->as('admin.')->group(function () {
     Route::resource('tags', 'TagController');
     Route::resource('posts', 'PostController');
 
