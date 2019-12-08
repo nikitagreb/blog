@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Mail\Markdown;
 
 /**
  * App\Models\Post
@@ -46,10 +47,26 @@ class Post extends Model
         'h1', 'title', 'description', 'keywords', 'text', 'status', 'slug',
     ];
 
+    protected $hidden = ['status', 'updated_at', 'avatar', 'text'];
+
+    protected $appends = ['avatar_url'];
+
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
     }
+
+    public function getAvatarUrlAttribute()
+    {
+        return $this->attributes['avatarUrl'] = $this->avatar->getImage();
+    }
+
+//    public function getTextHtmlAttribute()
+//    {
+////        dd($this->text, Markdown::parse($this->text));
+////        return $this->attributes['textHtml'] = Markdown::parse($this->text);
+//        return $this->attributes['textHtml'] = 'test';
+//    }
 
     public function avatar()
     {

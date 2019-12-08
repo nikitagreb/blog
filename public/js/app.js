@@ -2088,13 +2088,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var marked = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['attribute', 'label', 'value', 'hasError', 'textError'],
   mounted: function mounted() {
-    console.log('markdown mounted');
     this.input = this.value;
   },
   data: function data() {
@@ -2109,8 +2107,7 @@ var marked = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked
   computed: {
     compiledMarkdown: function compiledMarkdown() {
       return marked(this.input, {
-        sanitize: false // xhtml: true
-
+        sanitize: false
       });
     }
   },
@@ -2143,6 +2140,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 
+//
+//
 //
 //
 //
@@ -41250,7 +41249,7 @@ var render = function() {
                       },
                       domProps: { value: image.imageAlt },
                       on: {
-                        change: function($event) {
+                        input: function($event) {
                           return _vm.altInputChange($event)
                         }
                       }
@@ -41269,7 +41268,13 @@ var render = function() {
                         ],
                         staticClass: "invalid-feedback"
                       },
-                      [_vm._v(_vm._s(image.imageErrorMessage))]
+                      [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(image.imageErrorMessage) +
+                            "\n                            "
+                        )
+                      ]
                     )
                   ]),
                   _vm._v(" "),
