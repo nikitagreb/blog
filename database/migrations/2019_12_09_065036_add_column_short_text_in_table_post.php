@@ -20,7 +20,6 @@ class AddColumnShortTextInTablePost extends Migration
                 ->charset('utf8mb4')
                 ->collation('utf8mb4_unicode_ci')
                 ->nullable()
-//                ->default('')
                 ->comment('Текст превью');
         });
     }
