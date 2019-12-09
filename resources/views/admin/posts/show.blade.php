@@ -21,7 +21,11 @@
                         <tr>
                             <th>Фото</th>
                             <td>
-                                <img src="{{ $post->avatar->getImage() }}" alt="{{ $post->avatar->alt }}">
+                                @if($post->avatar)
+                                    <img src="{{ $post->avatar->getImage() }}" alt="{{ $post->avatar->alt }}">
+                                @else
+                                    Не загружено
+                                @endif
                             </td>
                         </tr>
                         <tr>
@@ -41,8 +45,12 @@
                             <td>{{ $post->keywords }}</td>
                         </tr>
                         <tr>
+                            <th>Текст превью</th>
+                            <td>{{ $post->preview_text }}</td>
+                        </tr>
+                        <tr>
                             <th>Текст</th>
-                            <td>{{ $post->text }}</td>
+                            <td>{{ $post->getTextHtml() }}</td>
                         </tr>
                         <tr>
                             <th>Статус</th>

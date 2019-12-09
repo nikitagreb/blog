@@ -97,7 +97,7 @@ class PostController extends Controller
      */
     public function update(UpdateRequest $request, Post $post)
     {
-        $post->update($request->only(['h1', 'title', 'description', 'keywords', 'text', 'status']));
+        $post->update($request->only(['h1', 'title', 'description', 'keywords', 'text', 'status', 'preview_text']));
         $post->tags()->sync($request['tags']);
 
         return redirect()->route('admin.posts.show', compact('post'));
