@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Mail\Markdown;
 
 /**
  * App\Models\Post
@@ -34,6 +35,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $slug Псевдоним для ссылки
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereSlug($value)
  * @property-read \App\Models\ImageAvatar $avatar
+ * @property string $preview_text Текст превью
+ * @property-read string $avatar_url
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post wherePreviewText($value)
  */
 class Post extends Model
 {
@@ -43,9 +47,7 @@ class Post extends Model
     public const STATUS_PUBLISHED = 'published';
 
     /** @var array */
-    protected $fillable = [
-        'h1', 'title', 'description', 'keywords', 'text', 'status', 'slug',
-    ];
+    protected $fillable = ['h1', 'title', 'description', 'keywords', 'text', 'status', 'slug', 'preview_text'];
 
     /** @var array */
     protected $hidden = ['status', 'updated_at', 'avatar', 'text'];
@@ -92,6 +94,14 @@ class Post extends Model
     public function isPublished(): bool
     {
         return $this->status === self::STATUS_PUBLISHED;
+    }
+
+    /**
+     * @return \Illuminate\Support\HtmlString
+     */
+    public function getTextHtml()
+    {
+        return Markdown::parse($this->text);
     }
 
     /**

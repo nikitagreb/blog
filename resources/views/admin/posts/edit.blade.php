@@ -33,6 +33,11 @@
                             'label' => 'Мета ключевые слова',
                             'value' => $post->keywords,
                         ])
+                        @include('common.forms.textarea', [
+                            'attribute' => 'preview_text',
+                            'label' => 'Текст превью',
+                            'value' => $post->preview_text,
+                        ])
 
                         <main-photo model-id="{{ $post->id }}"
                                     model-type="{{ get_class($post) }}"

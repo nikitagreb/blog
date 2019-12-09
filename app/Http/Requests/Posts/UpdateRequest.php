@@ -33,6 +33,7 @@ class UpdateRequest extends FormRequest
             'title' => "required|unique:posts,title,$post->id|max:100",
             'description' => 'required|max:200',
             'keywords' => 'required|max:200',
+            'preview_text' => 'required|max:250',
             'text' => 'required',
             'tags' => 'required|array',
             'status' => [
