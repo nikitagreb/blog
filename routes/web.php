@@ -21,6 +21,9 @@ Route::namespace('Api')->group(function () {
         ->where(['cnt' => '\d+']);
     Route::get('post/{id}', 'PostController@view')
         ->name('posts.view')
+        ->where(['id' => '\d+']);;
+    Route::get('post/{id}/next', 'PostController@getNextPost')
+        ->name('posts.nextPost')
         ->where(['id' => '\d+']);
 });
 
