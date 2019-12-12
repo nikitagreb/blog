@@ -15,7 +15,7 @@ Auth::routes(['register' => false]);
 
 Route::middleware('auth')->get('/', 'HomeController@index')->name('home');
 
-Route::namespace('Api')->group(function () {
+Route::namespace('Api')->middleware(['access.control'])->group(function () {
     Route::get('posts/{cnt}', 'PostController@getList')
         ->name('posts')
         ->where(['cnt' => '\d+']);
