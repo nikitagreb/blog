@@ -2,9 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\ImageAvatar;
-use App\Models\Post;
 use Faker\Generator as Faker;
+use App\Models\{ImageAvatar, Post};
 
 $factory->define(ImageAvatar::class, function (Faker $faker) {
     return array(
