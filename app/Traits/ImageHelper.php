@@ -63,7 +63,6 @@ trait ImageHelper
 
         $img = Image::make($file);
         $extension = $file->getClientOriginalExtension();
-
         $sourceWidth = $img->width();
         $sourceHeight = $img->height();
 
@@ -72,7 +71,6 @@ trait ImageHelper
         $quality = env('IMAGE_QUALITY');
 
         $name = Str::random(8) . '.' . $extension;
-
         if ($width < $sourceWidth || $height < $sourceHeight) {
             if ($sourceWidth > $sourceHeight) {
                 $height = (($width * $sourceHeight) / $sourceWidth);
