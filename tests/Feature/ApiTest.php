@@ -36,7 +36,7 @@ class ApiTest extends TestCase
 
     public function testListPost(): void
     {
-        $response = $this->get('/posts/3');
+        $response = $this->get('/api/posts/3');
         $response->assertStatus(200);
         $response->assertJsonPath('next_page_url', null);
         $response->assertJsonCount(2, 'data');
@@ -51,7 +51,7 @@ class ApiTest extends TestCase
     public function testNextPost(): void
     {
         $post = $this->getFirstPost();
-        $response = $this->get('/post/' . $post->id . '/next');
+        $response = $this->get('/api/post/' . $post->id . '/next');
         $response->assertStatus(200);
         $post = Post::whereStatus(Post::STATUS_PUBLISHED)->where('id', '>', $post->id)->firstOrFail();
         $this->assertPostJson($response, $post);
@@ -60,7 +60,7 @@ class ApiTest extends TestCase
     public function testViewPost(): void
     {
         $post = $this->getFirstPost();
-        $response = $this->get('/post/' . $post->id);
+        $response = $this->get('/api/post/' . $post->id);
         $response->assertStatus(200);
         $this->assertPostJson($response, $post);
     }

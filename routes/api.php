@@ -13,6 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+
+Route::namespace('Api')->middleware(['access.control'])->group(function () {
+    Route::get('posts/{cnt}', 'PostController@getList')
+        ->name('posts')
+        ->where(['cnt' => '\d+']);
+    Route::get('post/{id}', 'PostController@view')
+        ->name('posts.view')
+        ->where(['id' => '\d+']);;
+    Route::get('post/{id}/next', 'PostController@getNextPost')
+        ->name('posts.nextPost')
+        ->where(['id' => '\d+']);
 });
