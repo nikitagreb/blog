@@ -69,7 +69,7 @@ class Post extends Model
      */
     public function getAvatarUrlAttribute()
     {
-        return $this->attributes['avatarUrl'] = $this->avatar->getImage();
+        return $this->attributes['avatarUrl'] = $this->avatar ? $this->avatar->getImage() : null;
     }
 
     /**
