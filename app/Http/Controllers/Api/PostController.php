@@ -10,6 +10,8 @@ class PostController extends Controller
 {
     public function getList($cnt)
     {
+        header('Access-Control-Allow-Origin: *');
+
         $builder = Post::where('status', '=', Post::STATUS_PUBLISHED)
             ->with(['tags'])
             ->orderBy('id', 'desc');
@@ -19,6 +21,8 @@ class PostController extends Controller
 
     public function view($id)
     {
+        header('Access-Control-Allow-Origin: *');
+
         $post = Post::where('status', '=', Post::STATUS_PUBLISHED)->with(['tags'])->findOrFail($id);
 
         return array_merge(['text' => $post->text], $post->toArray());
@@ -26,6 +30,8 @@ class PostController extends Controller
 
     public function getNextPost($id)
     {
+        header('Access-Control-Allow-Origin: *');
+
         $post = Post::where('id', '>', $id)
             ->with(['tags'])
             ->where('status', '=', Post::STATUS_PUBLISHED)
