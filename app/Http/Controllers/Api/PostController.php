@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function getList($cnt)
     {
-        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Origin: *");
 
         $builder = Post::where('status', '=', Post::STATUS_PUBLISHED)
             ->with(['tags'])
@@ -21,7 +21,7 @@ class PostController extends Controller
 
     public function view($id)
     {
-        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Origin: *");
 
         $post = Post::where('status', '=', Post::STATUS_PUBLISHED)->with(['tags'])->findOrFail($id);
 
@@ -30,7 +30,7 @@ class PostController extends Controller
 
     public function getNextPost($id)
     {
-        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Origin: *");
 
         $post = Post::where('id', '>', $id)
             ->with(['tags'])
